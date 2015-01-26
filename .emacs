@@ -26,6 +26,8 @@
 (global-unset-key (kbd "<M-right>"))
 (global-unset-key (kbd "<M-up>"))
 (global-unset-key (kbd "<M-down>"))
+
+
 (add-hook 'js-mode-hook 'js2-minor-mode)
 
 ;; Turn off mouse interface
