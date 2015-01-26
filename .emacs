@@ -27,7 +27,6 @@
 (global-unset-key (kbd "<M-up>"))
 (global-unset-key (kbd "<M-down>"))
 
-
 ;; Adding js2-mode hook to js-mode
 (add-hook 'js-mode-hook 'js2-minor-mode)
 
