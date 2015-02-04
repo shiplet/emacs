@@ -26,6 +26,7 @@
 (global-unset-key (kbd "<M-right>"))
 (global-unset-key (kbd "<M-up>"))
 (global-unset-key (kbd "<M-down>"))
+(global-unset-key (kbd "C-x C-n"))
 
 ;; Adding js2-mode hook to js-mode
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
