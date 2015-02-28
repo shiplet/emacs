@@ -28,6 +28,20 @@
 (global-unset-key (kbd "<M-down>"))
 (global-unset-key (kbd "C-x C-n"))
 
+
+;; Popwin
+(add-to-list 'load-path "~/.emacs.d/elpa/popwin-0.6.2")
+(setq display-buffer-function 'popwin:display-buffer)
+(require 'popwin)
+
+;; Direx
+(add-to-list 'load-path "~/.emacs.d/elpa/direx-el")
+(push '(direx:direx-mode :position left :width 50 :dedicated t)
+      popwin:special-display-config)
+(global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
+(global-set-key (kbd "C-x j") 'direx:jump-to-directory-other-window)
+(require 'direx)
+
 ;; Adding js2-mode hook to js-mode
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'javascript-mode-hook 'js2-minor-mode)
@@ -79,10 +93,10 @@
 
 ;; MELPA package manager
 (require 'package)
+;; (add-to-list 'package-archives
+;; 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages") t)
+	     '("melpa" . "http://melpa.org/packages/") t)
 
 
 ;; SLIME
