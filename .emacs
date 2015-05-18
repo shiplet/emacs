@@ -1,6 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; EDITOR SETTINGS ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+(package-initialize)
+;; Mac keybindings
+(setq mac-option-modifier 'super)
+(setq ns-function-modifier 'hyper)
+(setq mac-command-modifier 'meta)
 
 (add-to-list 'load-path "~/.elisp")
 (add-to-list 'load-path "~/.emacs.d/elpa/autopair-0.6.1")
@@ -27,6 +32,28 @@
 (global-unset-key (kbd "<M-up>"))
 (global-unset-key (kbd "<M-down>"))
 (global-unset-key (kbd "C-x C-n"))
+
+;; Web-mode
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
+  )
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+
 
 
 ;; Popwin
@@ -70,11 +97,6 @@
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow--define-theme night)
 
-;; Mac keybindings
-(setq mac-option-modifier 'super)
-(setq ns-function-modifier 'hyper)
-(setq mac-command-modifier 'meta)
-
 ;; New save and shutdown keystroek
 (global-set-key (kbd "C-x C-h") 'save-buffers-kill-terminal)
 (global-set-key (kbd "M-s d") 'save-buffer)
@@ -100,8 +122,8 @@
 
 
 ;; SLIME
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; Ace-Jump-Mode major function
 (autoload
@@ -133,6 +155,9 @@
 
 ;; Expand Region keybinding
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'auto-complete)
+(global-auto-complete-mode t)
 
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized))))
