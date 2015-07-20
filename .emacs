@@ -2,17 +2,25 @@
 ;;;; EDITOR SETTINGS ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (package-initialize)
+(global-auto-revert-mode 1)
 ;; Mac keybindings
 (setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
 (setq mac-command-modifier 'meta)
 
+;; Monokai
+(load-theme 'monokai t)
+
+(global-set-key (kbd "C-x C-k") 'ido-kill-buffer)
+(global-set-key (kbd "M-s M-d") 'save-some-buffers)
 (add-to-list 'load-path "~/.elisp")
 (add-to-list 'load-path "~/.emacs.d/elpa/autopair-0.6.1")
 (require 'autopair)
 (autopair-global-mode)
 (require 'ido)
 (ido-mode t)
+(require 'projectile)
+(projectile-global-mode)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq backup-by-copying t)
 (setq delete-old-versions t
@@ -32,17 +40,23 @@
 (global-unset-key (kbd "<M-up>"))
 (global-unset-key (kbd "<M-down>"))
 (global-unset-key (kbd "C-x C-n"))
+(global-unset-key (kbd "C-h C-n"))
+(global-unset-key (kbd "C-x C-c"))
 
 ;; Web-mode
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.less\\'" . less-css-mode))
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-script-padding 2)
   
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
@@ -52,8 +66,9 @@
   '(("css" . (ac-source-css-property))
     ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
   )
+(setq web-mode-enable-current-column-highlight t)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
-
+(setq ac-js2-evaluate-calls t)
 
 
 ;; Popwin
@@ -86,7 +101,7 @@
 (setq initial-scratch-message nil)
 
 ;; Default directory
-(setq default-directory "~/")
+(setq default-directory "/Applications/MAMP/htdocs/")
 
 ;; Set linum and column mode
 (global-linum-mode 1)
@@ -94,8 +109,8 @@
 (setq line-number-mode t)
 
 ;; Tomorrow Night theme
-(require 'color-theme-tomorrow)
-(color-theme-tomorrow--define-theme night)
+;; (require 'color-theme-tomorrow)
+;; (color-theme-tomorrow--define-theme night)
 
 ;; New save and shutdown keystroek
 (global-set-key (kbd "C-x C-h") 'save-buffers-kill-terminal)
@@ -156,11 +171,8 @@
 ;; Expand Region keybinding
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-(require 'auto-complete)
-(global-auto-complete-mode t)
-
 (custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(initial-frame-alist (quote ((width . 254) (height . 79))))
  )
 (custom-set-faces
  )
