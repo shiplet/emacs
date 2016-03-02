@@ -1,8 +1,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; EDITOR SETTINGS ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'package)
+ (add-to-list 'package-archives
+ 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/") t)
+
+
 (package-initialize)
 (global-auto-revert-mode 1)
+
 ;; Mac keybindings
 (setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
@@ -54,7 +63,7 @@
   "Hooks for Web mode."
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-code-indent-offset 4)
   (setq web-mode-style-padding 2)
   (setq web-mode-script-padding 2)
   
@@ -101,7 +110,7 @@
 (setq initial-scratch-message nil)
 
 ;; Default directory
-(setq default-directory "/Applications/MAMP/htdocs/")
+(setq default-directory "~/dev/")
 
 ;; Set linum and column mode
 (global-linum-mode 1)
@@ -129,11 +138,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; MELPA package manager
-(require 'package)
-;; (add-to-list 'package-archives
-;; 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
 
 
 ;; SLIME
@@ -172,7 +176,7 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 (custom-set-variables
- '(initial-frame-alist (quote ((width . 254) (height . 79))))
+ '(initial-frame-alist (quote ((width . 361) (height . 106))))
  )
 (custom-set-faces
  )
