@@ -11,14 +11,33 @@
 
 (package-initialize)
 (global-auto-revert-mode 1)
+(when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+(global-hl-line-mode 1)
+
+(defun duplicate-line()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line 1)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank)
+)
 
 ;; Mac keybindings
 (setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
 (setq mac-command-modifier 'meta)
 
-;; Monokai
-(load-theme 'monokai t)
+;; Load theme
+(load-theme 'material t)
+
+;; eshell clear
+(defun eshell/clear()
+  "Clear the eshell buffer"
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    ))
 
 (global-set-key (kbd "C-x C-k") 'ido-kill-buffer)
 (global-set-key (kbd "M-s M-d") 'save-some-buffers)
@@ -75,7 +94,7 @@
   '(("css" . (ac-source-css-property))
     ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
   )
-(setq web-mode-enable-current-column-highlight t)
+(setq web-mode-enable-current-column-highlight nil)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 (setq ac-js2-evaluate-calls t)
 
@@ -110,24 +129,25 @@
 (setq initial-scratch-message nil)
 
 ;; Default directory
-(setq default-directory "~/dev/")
+(setq default-directory "~/Sites/zero_new/")
 
 ;; Set linum and column mode
 (global-linum-mode 1)
 (setq column-number-mode t)
 (setq line-number-mode t)
 
-;; Tomorrow Night theme
-;; (require 'color-theme-tomorrow)
-;; (color-theme-tomorrow--define-theme night)
-
 ;; New save and shutdown keystroek
-(global-set-key (kbd "C-x C-h") 'save-buffers-kill-terminal)
+(global-unset-key (kbd "M-q"))
+(global-set-key (kbd "M-q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "M-s d") 'save-buffer)
 
 ;; Font and other settings
 (setq ring-bell-function 'ignore)
-(set-default-font "-apple-Input_Sans_Narrow-medium-normal-condensed-*-11-*-*-*-p-0-iso10646-1")
+(set-default-font "-*-Ubuntu Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1")
+
+;; comment region
+(global-unset-key (kbd "M-/"))
+(global-set-key (kbd "M-/") 'comment-or-uncomment-region)
 
 ;; Move more quickly
 
@@ -150,7 +170,7 @@
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
-(define-key global-map (kbd "C-o") 'ace-jump-mode)
+(define-key global-map (kbd "C-o") 'ace-jump-char-mode)
 ;; enable a more powerful jump back function from ace jump mode
 (autoload
   'ace-jump-mode-pop-mark
@@ -176,7 +196,14 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 (custom-set-variables
- '(initial-frame-alist (quote ((width . 361) (height . 106))))
- )
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
