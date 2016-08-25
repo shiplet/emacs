@@ -14,16 +14,6 @@
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 (global-hl-line-mode 1)
 
-(defun duplicate-line()
-  (interactive)
-  (move-beginning-of-line 1)
-  (kill-line 1)
-  (yank)
-  (open-line 1)
-  (next-line 1)
-  (yank)
-)
-
 ;; Mac keybindings
 (setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
