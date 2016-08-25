@@ -2,6 +2,20 @@
 ;;;; EDITOR SETTINGS ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Install the following packages before loading:
+;; ace-jump-mode
+;; ace-window
+;; autopair
+;; direx
+;; js2-mode
+;; magit
+;; multiple-cursors
+;; popwin
+;; projectile
+;; sass-mode
+;; web-mode
+;; zenburn-theme
+
 (require 'package)
  (add-to-list 'package-archives
  	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
@@ -20,6 +34,7 @@
 (setq mac-command-modifier 'meta)
 (global-unset-key (kbd "M-F"))
 (global-set-key (kbd "M-F") 'rgrep)
+(global-set-key (kbd "M-C-g") 'magit-status)
 
 ;; Load theme
 ;; (load-theme 'material t)
