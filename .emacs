@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; EDITOR SETTINGS ;;;;
+;;;; Editor SETTINGS ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Install the following packages before loading:
@@ -35,6 +35,7 @@
 (global-unset-key (kbd "M-F"))
 (global-set-key (kbd "M-F") 'rgrep)
 (global-set-key (kbd "M-C-g") 'magit-status)
+(global-unset-key (kbd "C-z"))
 
 ;; Load theme
 ;; (load-theme 'material t)
@@ -137,7 +138,7 @@
 (setq initial-scratch-message nil)
 
 ;; Default directory
-(setq default-directory "~/Sites/zero_new/")
+(setq default-directory "~")
 
 ;; Set linum and column mode
 (global-linum-mode 1)
