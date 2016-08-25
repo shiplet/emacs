@@ -28,9 +28,12 @@
 (setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
 (setq mac-command-modifier 'meta)
+(global-unset-key (kbd "M-F"))
+(global-set-key (kbd "M-F") 'rgrep)
 
 ;; Load theme
-(load-theme 'material t)
+;; (load-theme 'material t)
+(load-theme 'zenburn t)
 
 ;; eshell clear
 (defun eshell/clear()
