@@ -36,6 +36,8 @@
 (global-set-key (kbd "M-F") 'rgrep)
 (global-set-key (kbd "M-C-g") 'magit-status)
 (global-unset-key (kbd "C-z"))
+(global-unset-key (kbd "M-c"))
+(global-set-key (kbd "M-c") 'compile)
 
 ;; Load theme
 ;; (load-theme 'material t)
