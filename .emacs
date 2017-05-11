@@ -16,7 +16,7 @@
 ;; fiplr
 ;; smartparens
 ;; elpy
-
+;; emmet
 
 (require 'package)
  (add-to-list 'package-archives
@@ -48,10 +48,12 @@
 (global-unset-key (kbd "M-d"))
 (global-unset-key (kbd "M-q"))
 (global-unset-key (kbd "M-/"))
+(global-unset-key (kbd "C-T"))
 
 (global-set-key (kbd "M-F") 'rgrep)
 ;; (global-set-key (kbd "M-C-g") 'magit-status)
 (global-set-key (kbd "M-c") 'compile)
+(global-set-key (kbd "C-T") 'delete-trailing-whitespace)
 
 (global-set-key (kbd "M-d") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-M-m C-M-m") 'mc/edit-lines)
@@ -70,6 +72,7 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-0") 'ace-window)
 
+
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?l))
 
 (global-auto-revert-mode 1)
@@ -86,6 +89,8 @@
 (delete `elpy-module-highlight-indentation elpy-modules)
 
 (smartparens-global-mode 1)
+
+(delete-selection-mode 1)
 
 ;; eshell clear
 (defun eshell/clear()
@@ -123,9 +128,10 @@
   (setq web-mode-code-indent-offset 4)
   (setq web-mode-style-padding 2)
   (setq web-mode-script-padding 2)
-  
+
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
+(add-hook 'web-mode-hook 'emmet-mode)
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-css-colorization t)
 (setq web-mode-ac-sources-alist
@@ -133,8 +139,9 @@
     ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
   )
 (setq web-mode-enable-current-column-highlight nil)
-(add-hook 'js2-mode-hook 'ac-js2-mode)
-(setq ac-js2-evaluate-calls t)
+(setq js2-strict-missing-semi-warning nil)
+(setq js2-missing-semi-one-line-override t)
+(setq js2-strict-inconsistent-return-warning nil)
 
 
 ;; Popwin
@@ -145,7 +152,8 @@
 ;; Adding js2-mode hook to js-mode
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-hook 'javascript-mode-hook 'js2-minor-mode)
-(add-hook 'js2-mode-hook 'skewer-mode)
+;;(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'js2-mode-hook 'electric-indent-mode)
 
 ;; Turn off mouse interface
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -209,12 +217,15 @@
  '(custom-safe-themes
    (quote
     ("a1289424bbc0e9f9877aa2c9a03c7dfd2835ea51d8781a0bf9e2415101f70a7e" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" default)))
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(fci-rule-color "#3E4451")
  '(hl-sexp-background-color "#1c1f26")
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (atom-dark-theme expand-region elpy sass-mode smartparens web-mode projectile popwin neotree multiple-cursors js2-mode fiplr ace-window ace-jump-mode)))
+    (emmet-mode skewer-mode atom-dark-theme expand-region elpy sass-mode smartparens web-mode projectile popwin neotree multiple-cursors js2-mode fiplr ace-window ace-jump-mode)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
